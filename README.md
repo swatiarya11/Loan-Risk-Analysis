@@ -100,9 +100,8 @@ It combines SQL, Power BI, and Machine Learning to deliver end-to-end insights.
 
 ---
 
-## 🔗 Project Demo
-(Add your web app link here)
-
+## 🔗Loan-Default-Prediction-App
+https://loan-default-pred-app.streamlit.app/
 ---
 
 ## 🙌 Conclusion
