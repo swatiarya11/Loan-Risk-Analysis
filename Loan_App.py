@@ -9,6 +9,41 @@ model_columns = joblib.load('Model_columns.pkl')
 
 st.set_page_config(page_title="Loan Risk App", layout="wide")
 
+st.markdown("""
+<style>
+
+.kpi-card {
+    background-color: #111827;
+    padding: 20px;
+    border-radius: 15px;
+    border: 1px solid #374151;
+    text-align: center;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+}
+
+.kpi-title {
+    font-size: 16px;
+    color: #9ca3af;
+    margin-bottom: 10px;
+}
+
+.kpi-value {
+    font-size: 30px;
+    font-weight: bold;
+    color: white;
+}
+
+.kpi-green {
+    color: #22c55e;
+}
+
+.kpi-red {
+    color: #ef4444;
+}
+
+</style>
+""", unsafe_allow_html=True)
+
 st.title("💳 AI-Powered Loan Risk Decision System")
 
 
@@ -44,6 +79,50 @@ else:
     # ---------------- EDA TAB ----------------
     if page == "📊 EDA":
         st.title("📊 Exploratory Data Analysis")
+
+        st.subheader("📊 Key Metrics Overview")
+
+        col1, col2, col3, col4 = st.columns(4)
+
+        total_customers = df['PROSPECTID'].nunique()
+        default_rate = df['Default_flag'].mean() * 100
+        avg_credit_score = df['Credit_Score'].mean()
+        avg_age = df['AGE'].mean()
+
+        # Conditional color
+        default_color = "kpi-red" if default_rate > 10 else "kpi-green"
+
+        with col1:
+            st.markdown(f"""
+            <div class="kpi-card">
+                <div class="kpi-title">👥 Total Customers</div>
+                <div class="kpi-value">{total_customers:,}</div>
+            </div>
+            """, unsafe_allow_html=True)
+
+        with col2:
+            st.markdown(f"""
+            <div class="kpi-card">
+                <div class="kpi-title">⚠️ Default Rate</div>
+                <div class="kpi-value {default_color}">{default_rate:.2f}%</div>
+            </div>
+            """, unsafe_allow_html=True)
+
+        with col3:
+            st.markdown(f"""
+            <div class="kpi-card">
+                <div class="kpi-title">💳 Avg Credit Score</div>
+                <div class="kpi-value">{avg_credit_score:.0f}</div>
+            </div>
+            """, unsafe_allow_html=True)
+
+        with col4:
+            st.markdown(f"""
+            <div class="kpi-card">
+                <div class="kpi-title">🎂 Avg Age</div>
+                <div class="kpi-value">{avg_age:.0f}</div>
+            </div>
+            """, unsafe_allow_html=True)
 
         st.subheader("📊 Default Distribution")
 
