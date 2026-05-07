@@ -6,6 +6,7 @@ import numpy as np
 # ---------------- LOAD MODEL ----------------
 model = joblib.load('Loan_Default_Model.pkl')
 model_columns = joblib.load('Model_columns.pkl')
+df=pd.read_csv('Loan_merged_data.csv')
 
 st.set_page_config(page_title="Loan Risk App", layout="wide")
 
